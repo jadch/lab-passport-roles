@@ -158,6 +158,17 @@ siteController.post('/addcourse', checkRoles('TA'), (req, res, next) => {
   })
 })
 
+// ==== COURSE LIST ====
+siteController.get('/courses', (req, res, next) => {
+  Course.find({})
+    .populate('TA')
+    .exec((error, courses) => {
+      res.render('courseViews/courselist', {
+        courses
+      })
+    })
+})
+
 // ===== USER ROLE-CHECKING =====
 function checkRoles(role) {
   return (req, res, next) => {

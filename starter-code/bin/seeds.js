@@ -56,13 +56,20 @@ const courses = [
 ];
 
 
+User.remove({}, function(err) { 
+  console.log('User collection removed');
 
-User.create(boss, (err, user) => {
-  if (err) {
-    throw err;
-  }
-  console.log(user);
+  User.create(boss, (err, user) => {
+    if (err) {
+      throw err;
+    }
+    console.log(user);
+
+    mongoose.disconnect();
+  });
 });
+
+
 
 // Course.create(courses, (err, docs)=>{
 //   if (err) { throw err };
